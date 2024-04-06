@@ -77,6 +77,7 @@ export default function PreviewSightingScreen({ route, navigation }) {
           <Picker.Item label="Chasing a squirrel" value="Chasing a squirrel" />
         </Picker>
         
+        
         <TextInput
           style={styles.input}
           placeholder="Sighting comment"
