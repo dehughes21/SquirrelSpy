@@ -3,12 +3,6 @@ import { Alert } from 'react-native';
 import * as Location from 'expo-location';
 
 
-async function getLocation() {
-    const location = await Location.getCurrentPositionAsync({});
-    const lat = location.coords.latitude;
-    const long = location.coords.longitude;
-    return [lat, long];
-  }
 
 export async function confirmSighting({ photo, selectedSquirrel, selectedBehavior, comment, navigation }) {
   const formData = new FormData();
@@ -53,6 +47,14 @@ export async function confirmSighting({ photo, selectedSquirrel, selectedBehavio
     console.log("failed: ", ex);
   });
 }
+
+async function getLocation() {
+  const location = await Location.getCurrentPositionAsync({});
+  const lat = location.coords.latitude;
+  const long = location.coords.longitude;
+  return [lat, long];
+}
+
 
 export async function savePhoto(uri) {
   await MediaLibrary.saveToLibraryAsync(uri);
