@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Button, Image, TextInput, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { Text, View, Button, Image, TextInput, SafeAreaView, ScrollView, StyleSheet, Platform, Dimensions } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { confirmSighting, savePhoto, discardPhoto, fetchSquirrels } from '../Functions/previewSightingFunctions';
 
@@ -9,6 +9,7 @@ export default function PreviewSightingScreen({ route, navigation }) {
   const [selectedBehavior, setSelectedBehavior] = useState('');
   const [selectedSquirrel, setSelectedSquirrel] = useState('0');
   const [squirrels, setSquirrels] = useState([]);
+  const [paddingBelowTextInput, setPaddingBelowTextInput] = useState(20); // Initial padding value
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,6 +18,12 @@ export default function PreviewSightingScreen({ route, navigation }) {
     };
 
     fetchData();
+
+    // Calculate dynamic padding based on screen height
+    const screenHeight = Dimensions.get('window').height;
+    const paddingRatio = screenHeight <= 667 ? 30 : 50; // Adjust padding for smaller screens
+    const calculatedPadding = (screenHeight * paddingRatio) / 667; // Calculate padding based on iPhone SE height
+    setPaddingBelowTextInput(calculatedPadding);
   }, []);
 
   const handleConfirmSighting = async () => {
@@ -35,56 +42,49 @@ export default function PreviewSightingScreen({ route, navigation }) {
   return (
     <SafeAreaView style={styles.containerPreview}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      
         <Image style={styles.preview} source={{ uri: photo.uri }} />
-
         <View style={styles.buttonsContainer}>
           <Button title="Discard" onPress={handleDiscardPhoto} />
           <Button title="Save Image" onPress={handleSavePhoto} />
           <Button title="Confirm Sighting" onPress={handleConfirmSighting} />
         </View>
-        
         <View style={styles.labelContainer}>
           <Text style={styles.label}>Squirrel</Text>
         </View>
         <Picker
-        selectedValue = {selectedSquirrel}
-          style={styles.picker}
+          selectedValue={selectedSquirrel}
+          style={[styles.picker, Platform.OS === 'ios' && styles.pickerIOS]}
           onValueChange={(itemValue, itemIndex) => setSelectedSquirrel(itemValue)}>
           <Picker.Item label="No Tag" value={null} />
-            {squirrels.map((squirrel) => (
-          <Picker.Item  
-            key={squirrel.id}
-            label={`Left Ear: ${squirrel.left_ear_color} | Right Ear: ${squirrel.right_ear_color}`}
-            value={squirrel.id}
-          />
+          {squirrels.map((squirrel) => (
+            <Picker.Item
+              key={squirrel.id}
+              label={`Left Ear: ${squirrel.left_ear_color} | Right Ear: ${squirrel.right_ear_color}`}
+              value={squirrel.id}
+            />
           ))}
-          
         </Picker>
-
         <View style={styles.labelContainer}>
           <Text style={styles.label}>Behavior</Text>
         </View>
         <Picker
-        selectedValue = {selectedBehavior}
-          style={styles.picker}
-          onValueChange={(itemValue, itemIndex) =>
-            setSelectedBehavior(itemValue)
-          }>
+          selectedValue={selectedBehavior}
+          style={[styles.picker, Platform.OS === 'ios' && styles.pickerIOS]}
+          onValueChange={(itemValue, itemIndex) => setSelectedBehavior(itemValue)}>
           <Picker.Item label="None" value="" />
           <Picker.Item label="Eating" value="Eating" />
           <Picker.Item label="Sleeping" value="Sleeping" />
           <Picker.Item label="Chasing a squirrel" value="Chasing a squirrel" />
         </Picker>
-        
         <TextInput
           style={styles.input}
           placeholder="Sighting comment"
           value={comment}
           onChangeText={setComment}
         />
-
-
+        <View style={{ marginBottom: paddingBelowTextInput }}>
+          {/* Add padding below TextInput */}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -94,12 +94,10 @@ const styles = StyleSheet.create({
   containerPreview: {
     flex: 1,
     backgroundColor: '#f9f9f9', 
-    alignItems: 'center',
-    justifyContent: 'center',
     paddingHorizontal: 20, 
   },
   preview: {
-    width: '80%',
+    width: '100%',
     aspectRatio: 9 / 16, 
     borderRadius: 10, 
     marginBottom: 30, 
@@ -128,6 +126,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 1,
     borderColor: '#dcdcdc', 
+  },
+  pickerIOS: {
+    // Add platform specific styles for iOS picker
+    backgroundColor: '#f4f4f4',
   },
   labelContainer: {
     width: '100%',

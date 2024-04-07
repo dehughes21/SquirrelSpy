@@ -13,9 +13,7 @@ const SightingItem = ({ sighting }) => (
 );
 
 const SquirrelDetailsScreen = ({ route }) => {
-  // Extract the squirrel data from the route parameters
-  const { id } = route.params;
-  const { image, name, species, sex, left_ear_color, right_ear_color, age, weight } = route.params;
+  const { id, image, name, species, sex, left_ear_color, right_ear_color, age, weight } = route.params;
 
   const [sightings, setSightings] = useState([]);
 
@@ -43,6 +41,7 @@ const SquirrelDetailsScreen = ({ route }) => {
           <Text style={styles.species}>{species}</Text>
         </View>
       </View>
+
       <View style={styles.detailsContainer}>
         <Text style={styles.detail}>Sex: {sex}</Text>
         <Text style={styles.detail}>Left Ear Color: {left_ear_color}</Text>
@@ -50,6 +49,7 @@ const SquirrelDetailsScreen = ({ route }) => {
         <Text style={styles.detail}>Age: {age}</Text>
         <Text style={styles.detail}>Weight: {weight} lbs</Text>
       </View>
+      
       <View style={styles.sightingsContainer}>
         <Text style={styles.heading}>Sightings</Text>
         {sightings.map((sighting, index) => (
