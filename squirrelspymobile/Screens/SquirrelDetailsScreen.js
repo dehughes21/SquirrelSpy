@@ -55,7 +55,6 @@ const SquirrelDetailsScreen = ({ route }) => {
         {sightings.map((sighting, index) => (
           <SightingItem key={index} sighting={sighting} />
         ))}
-        {/* Add padding at the bottom */}
         <View style={{ height: 20 }} />
       </View>
     </ScrollView>

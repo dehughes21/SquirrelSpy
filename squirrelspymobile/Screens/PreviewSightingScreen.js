@@ -9,7 +9,7 @@ export default function PreviewSightingScreen({ route, navigation }) {
   const [selectedBehavior, setSelectedBehavior] = useState('');
   const [selectedSquirrel, setSelectedSquirrel] = useState('0');
   const [squirrels, setSquirrels] = useState([]);
-  const [paddingBelowTextInput, setPaddingBelowTextInput] = useState(20); // Initial padding value
+  const [paddingBelowTextInput, setPaddingBelowTextInput] = useState(20); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,10 +19,9 @@ export default function PreviewSightingScreen({ route, navigation }) {
 
     fetchData();
 
-    // Calculate dynamic padding based on screen height
     const screenHeight = Dimensions.get('window').height;
-    const paddingRatio = screenHeight <= 667 ? 30 : 50; // Adjust padding for smaller screens
-    const calculatedPadding = (screenHeight * paddingRatio) / 667; // Calculate padding based on iPhone SE height
+    const paddingRatio = screenHeight <= 667 ? 30 : 50;
+    const calculatedPadding = (screenHeight * paddingRatio) / 667; 
     setPaddingBelowTextInput(calculatedPadding);
   }, []);
 
@@ -83,7 +82,6 @@ export default function PreviewSightingScreen({ route, navigation }) {
           onChangeText={setComment}
         />
         <View style={{ marginBottom: paddingBelowTextInput }}>
-          {/* Add padding below TextInput */}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -128,7 +126,6 @@ const styles = StyleSheet.create({
     borderColor: '#dcdcdc', 
   },
   pickerIOS: {
-    // Add platform specific styles for iOS picker
     backgroundColor: '#f4f4f4',
   },
   labelContainer: {

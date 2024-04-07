@@ -1,4 +1,3 @@
-// HomeScreen.js
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, Button, Image, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';

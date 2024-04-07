@@ -7,10 +7,10 @@ import * as Location from 'expo-location';
 export async function confirmSighting({ photo, selectedSquirrel, selectedBehavior, comment, navigation }) {
   const formData = new FormData();
 
-  // Get user.id from token??
+
   formData.append('user', 1);
 
-  // Get squirrel.id from left and right ear colors
+ 
   formData.append('squirrel', selectedSquirrel);
 
   const loc = await getLocation();
@@ -20,7 +20,7 @@ export async function confirmSighting({ photo, selectedSquirrel, selectedBehavio
   formData.append('long', long);
   formData.append('time', new Date().toISOString());
 
-  // Get from user
+ 
   formData.append('certainty_level', 3);
   formData.append('behavior', selectedBehavior);
   formData.append('comment', comment);
@@ -32,7 +32,7 @@ export async function confirmSighting({ photo, selectedSquirrel, selectedBehavio
 
   console.log(formData);
 
-  // Send sighting
+
   const response = await fetch('http://10.0.2.2:8000/sightings/', {
     method: 'POST',
     body: formData,

@@ -17,7 +17,6 @@ const SquirrelsScreen = () => {
     }, []);
 
     const handleSquirrelPress = (squirrel) => {
-        // Navigate to SquirrelDetailsScreen with the selected squirrel 
         navigation.navigate('SquirrelDetails', squirrel);
     };
 
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     squirrelName: {
-        fontWeight: 'bold', // Make the squirrel name bold
+        fontWeight: 'bold', 
     },
 });
 
