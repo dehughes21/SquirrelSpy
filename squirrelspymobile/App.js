@@ -2,13 +2,14 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons'; // Importing Ionicons from expo vector icons
 
 import HomeScreen from './Screens/HomeScreen';
 import PreviewSightingScreen from './Screens/PreviewSightingScreen';
 import FeedScreen from './Screens/FeedScreen';
 import SquirrelsScreen from './Screens/SquirrelsScreen';
 import MyProfileScreen from './Screens/MyProfileScreen';
-import SquirrelDetailsScreen from './Screens/SquirrelDetailsScreen'; // Import the SquirrelDetailsScreen
+import SquirrelDetailsScreen from './Screens/SquirrelDetailsScreen'; 
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -21,9 +22,28 @@ const HomeStack = () => (
 );
 
 const MainTabs = () => (
-  <Tab.Navigator>
+  <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === 'Camera') {
+          iconName = focused ? 'camera' : 'camera-outline';
+        } else if (route.name === 'Sightings') {
+          iconName = focused ? 'eye' : 'eye-outline';
+        } else if (route.name === 'Squirrels') {
+          iconName = focused ? 'paw' : 'paw-outline';
+        } else if (route.name === 'My Profile') {
+          iconName = focused ? 'person' : 'person-outline';
+        }
+
+        return <Ionicons name={iconName} size={size} color={color} />;
+      },
+    })}
+    
+  >
     <Tab.Screen name="Camera" component={HomeStack} />
-    <Tab.Screen name="Feed" component={FeedScreen} />
+    <Tab.Screen name="Sightings" component={FeedScreen} />
     <Tab.Screen name="Squirrels" component={SquirrelsScreen} />
     <Tab.Screen name="My Profile" component={MyProfileScreen} />
   </Tab.Navigator>
@@ -34,7 +54,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} />
-        <Stack.Screen name="SquirrelDetails" component={SquirrelDetailsScreen} />
+        <Stack.Screen name="SquirrelDetails" component={SquirrelDetailsScreen}  />
       </Stack.Navigator>
     </NavigationContainer>
   );

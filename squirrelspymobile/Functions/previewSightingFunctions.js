@@ -89,3 +89,14 @@ export async function fetchSquirrels() {
       return [];
     }
   }
+
+export async function fetchSightings() {
+  try {
+    const response = await fetch('http://10.0.2.2:8000/sightings/');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching sightings:', error);
+    return [];
+  }
+}

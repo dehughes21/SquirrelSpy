@@ -1,4 +1,3 @@
-// PreviewScreen.js
 import React, { useState, useEffect } from 'react';
 import { Text, View, Button, Image, TextInput, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
@@ -52,7 +51,7 @@ export default function PreviewSightingScreen({ route, navigation }) {
         selectedValue = {selectedSquirrel}
           style={styles.picker}
           onValueChange={(itemValue, itemIndex) => setSelectedSquirrel(itemValue)}>
-          <Picker.Item label="Select a squirrel" value={null} />
+          <Picker.Item label="No Tag" value={null} />
             {squirrels.map((squirrel) => (
           <Picker.Item  
             key={squirrel.id}
@@ -60,6 +59,7 @@ export default function PreviewSightingScreen({ route, navigation }) {
             value={squirrel.id}
           />
           ))}
+          
         </Picker>
 
         <View style={styles.labelContainer}>
@@ -76,7 +76,6 @@ export default function PreviewSightingScreen({ route, navigation }) {
           <Picker.Item label="Sleeping" value="Sleeping" />
           <Picker.Item label="Chasing a squirrel" value="Chasing a squirrel" />
         </Picker>
-        
         
         <TextInput
           style={styles.input}

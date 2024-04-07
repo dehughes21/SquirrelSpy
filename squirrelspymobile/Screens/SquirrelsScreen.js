@@ -20,7 +20,7 @@ const SquirrelsScreen = () => {
   
   
   const handleSquirrelPress = (squirrel) => {
-    // Navigate to SquirrelDetailsScreen with the selected squirrel ID
+    // Navigate to SquirrelDetailsScreen with the selected squirrel 
     navigation.navigate('SquirrelDetails', squirrel);
   };
 
