@@ -27,7 +27,7 @@ const MainTabs = () => (
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
 
-        if (route.name === 'Camera') {
+        if (route.name === 'Make a Sighting') {
           iconName = focused ? 'camera' : 'camera-outline';
         } else if (route.name === 'Sightings') {
           iconName = focused ? 'eye' : 'eye-outline';
@@ -42,7 +42,7 @@ const MainTabs = () => (
     })}
     
   >
-    <Tab.Screen name="Camera" component={HomeStack} />
+    <Tab.Screen name="Make a Sighting" component={HomeStack} />
     <Tab.Screen name="Sightings" component={FeedScreen} />
     <Tab.Screen name="Squirrels" component={SquirrelsScreen} />
     <Tab.Screen name="My Profile" component={MyProfileScreen} />
