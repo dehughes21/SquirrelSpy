@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { fetchSquirrels } from '../Functions/previewSightingFunctions'; 
+import { fetchSquirrels } from '../Functions/functions'; 
 import axios from 'axios';
 
 const SightingItem = React.memo(({ sighting, squirrels, navigation }) => {
