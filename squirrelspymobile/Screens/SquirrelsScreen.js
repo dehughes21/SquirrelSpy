@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { fetchSquirrels } from '../Functions/previewSightingFunctions';
+import { fetchSquirrels } from '../Functions/functions';
 
 const SquirrelsScreen = () => {
     const [squirrels, setSquirrels] = useState([]);

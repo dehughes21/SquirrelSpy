@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Button, Image, TextInput, SafeAreaView, ScrollView, StyleSheet, Platform, Dimensions } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { confirmSighting, savePhoto, discardPhoto, fetchSquirrels } from '../Functions/previewSightingFunctions';
+import { confirmSighting, savePhoto, discardPhoto, fetchSquirrels } from '../Functions/functions';
 
 export default function PreviewSightingScreen({ route, navigation }) {
   const { photo } = route.params;
