@@ -8,6 +8,7 @@ export default function PreviewSightingScreen({ route, navigation }) {
   const [comment, setComment] = useState('');
   const [selectedBehavior, setSelectedBehavior] = useState('');
   const [selectedSquirrel, setSelectedSquirrel] = useState('0');
+  const [certaintyLevel, setCertaintyLevel] = useState('');
   const [squirrels, setSquirrels] = useState([]);
   const [paddingBelowTextInput, setPaddingBelowTextInput] = useState(20); 
 
@@ -26,7 +27,7 @@ export default function PreviewSightingScreen({ route, navigation }) {
   }, []);
 
   const handleConfirmSighting = async () => {
-    await confirmSighting({ photo, selectedSquirrel, selectedBehavior, comment, navigation });
+    await confirmSighting({ photo, selectedSquirrel, selectedBehavior, certaintyLevel, comment, navigation });
     navigation.goBack()
   };
 
@@ -74,6 +75,18 @@ export default function PreviewSightingScreen({ route, navigation }) {
           <Picker.Item label="Eating" value="Eating" />
           <Picker.Item label="Sleeping" value="Sleeping" />
           <Picker.Item label="Chasing a squirrel" value="Chasing a squirrel" />
+        </Picker>
+        <View style={styles.labelContainer}>
+          <Text style={styles.label}>Certainty Level</Text>
+        </View>
+        <Picker
+          selectedValue={certaintyLevel}
+          style={[styles.picker, Platform.OS === 'ios' && styles.pickerIOS]}
+          onValueChange={(itemValue, itemIndex) => setCertaintyLevel(itemValue)}>
+          <Picker.Item label="0" value="0" />
+          <Picker.Item label="1" value="1" />
+          <Picker.Item label="2" value="2" />
+          <Picker.Item label="3" value="3" />
         </Picker>
         <TextInput
           style={styles.input}

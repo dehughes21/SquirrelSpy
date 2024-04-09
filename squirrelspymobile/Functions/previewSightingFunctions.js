@@ -4,7 +4,7 @@ import * as Location from 'expo-location';
 
 
 
-export async function confirmSighting({ photo, selectedSquirrel, selectedBehavior, comment, navigation }) {
+export async function confirmSighting({ photo, selectedSquirrel, selectedBehavior, certaintyLevel, comment, navigation }) {
   const formData = new FormData();
 
 
@@ -21,7 +21,7 @@ export async function confirmSighting({ photo, selectedSquirrel, selectedBehavio
   formData.append('time', new Date().toISOString());
 
  
-  formData.append('certainty_level', 3);
+  formData.append('certainty_level', certaintyLevel);
   formData.append('behavior', selectedBehavior);
   formData.append('comment', comment);
   formData.append('image', {

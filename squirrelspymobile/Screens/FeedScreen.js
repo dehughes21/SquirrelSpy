@@ -22,13 +22,16 @@ const FeedScreen = () => {
 
   const SightingItem = ({ sighting }) => (
     <View style={styles.sightingItem}>
-      <Image source={{ uri: sighting.image }} style={styles.sightingImage} />
+      <Image source={{ uri: sighting.image }} style={styles.squirrelImage} />
       <View style={styles.sightingTextContainer}>
         <Text style={styles.sightingDateTime}>{sighting.time}</Text>
         <Text style={styles.sightingBehavior}>{sighting.behavior}</Text>
       </View>
+      <Image source={{ uri: sighting.image }} style={styles.sightingImage} />
     </View>
   );
+  
+
 
   return (
     <ScrollView style={styles.container}>
@@ -51,17 +54,24 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   sightingItem: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 30,
   },
+  
   sightingImage: {
-    width: 60,
-    height: 60,
+    width: 400,
+    height: 400,
     borderRadius: 10,
   },
   sightingTextContainer: {
     marginLeft: 10,
+  },
+  squirrelImage: {
+    width: 50, // Adjust the width and height as needed
+    height: 50,
+    alignSelf: 'flex-start',
+    marginBottom: 10, // Adjust this value to add space between the squirrel image and sighting text
   },
   sightingDateTime: {
     fontSize: 16,
