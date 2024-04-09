@@ -9,7 +9,7 @@ import PreviewSightingScreen from './Screens/PreviewSightingScreen';
 import FeedScreen from './Screens/FeedScreen';
 import SquirrelsScreen from './Screens/SquirrelsScreen';
 import MyProfileScreen from './Screens/MyProfileScreen';
-import SquirrelDetailsScreen from './Screens/SquirrelDetailsScreen'; 
+import SightingDetailsScreen from './Screens/SightingDetailsScreen'; 
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -40,7 +40,6 @@ const MainTabs = () => (
         return <Ionicons name={iconName} size={size} color={color} />;
       },
     })}
-    
   >
     <Tab.Screen name="Make a Sighting" component={HomeStack} />
     <Tab.Screen name="Sightings" component={FeedScreen} />
@@ -54,7 +53,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} />
-        <Stack.Screen name="SquirrelDetails" component={SquirrelDetailsScreen}  />
+        <Stack.Screen name="SightingDetails" component={SightingDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
