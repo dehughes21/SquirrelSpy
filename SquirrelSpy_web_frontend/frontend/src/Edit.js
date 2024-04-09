@@ -18,7 +18,7 @@ const Edit = () =>{
                 </div>
 
                 <div className="add-btn">
-                    <a className="" href='/verity'> Verify</a>
+                    <a className="" href='/verify'> Verify</a>
                 </div>
 
                 <div className="add-btn">

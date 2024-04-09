@@ -5,7 +5,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 body {
-background-color: rgb(204,0,0);
+background-color: rgb(86, 18, 22);
     }
 .header{
     padding: 25px;
@@ -14,11 +14,11 @@ background-color: rgb(204,0,0);
     }
 .title{
     font-size: 50px;
-    color: orange;
+    color: rgba(166, 129, 69);
     }
 .add-btn{
     padding: 15px;
-    background-color: orange;
+    background-color: rgba(166, 129, 69);
     border-radius: 10;
     text-decoration: none;
     text-transform: uppercase;
@@ -26,7 +26,7 @@ background-color: rgb(204,0,0);
 .add-section{
     margin-top: 10px;
     padding: 15px;
-    background-color: orange;
+    background-color: rgba(166, 129, 69);
     border-radius: 10;
     text-decoration: none;
     text-transform: uppercase;
@@ -55,9 +55,21 @@ background-color: rgb(204,0,0);
     border-bottom: none; /* Remove border-bottom from the last item */
 }
 
-.grid-container {
+.sightings-grid-container {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr); /* Adjust the number of columns as needed */
+    grid-gap: 1px; /* Adjust the gap between grid items */
+}
+
+.squirrels-grid-container {
     display: grid;
     grid-template-columns: repeat(10, 1fr); /* Adjust the number of columns as needed */
+    grid-gap: 1px; /* Adjust the gap between grid items */
+}
+
+.users-grid-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Adjust the number of columns as needed */
     grid-gap: 1px; /* Adjust the gap between grid items */
 }
 

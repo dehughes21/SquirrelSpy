@@ -1,7 +1,28 @@
 import React from 'react'
 import './style/mian.css'
+import {useEffect, useState} from 'react';
 
 const Moderate = () =>{
+    const [users, setUsers] = useState([]);
+
+    const getSquirrels = async () => {
+            const response = await fetch('users');
+            const json = await response.json();
+        if (response.ok) {
+            console.log(json);
+            setUsers(json);
+        }
+        else{
+            console.log('Failed to fetch')
+        }
+    }
+
+    useEffect(
+        () => {
+            getSquirrels()
+        },[]
+    )
+
     return(
         <div>
             <div className="header">
@@ -26,11 +47,28 @@ const Moderate = () =>{
                 </div>
             </div>
 
-             <div className="container">
+            <div className="container">
                 <ul className="list">
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                    {/* Add more list items as needed */}
+                    {users.map((user, index) => (
+                        <li key={index} className="squirrel-item">
+                            <div className="users-grid-container">
+                                <li>ID:</li>
+                                <li>Name:</li>
+                                <li>email:</li>
+                                <li>is_staff:</li>
+                                <li>is_active:</li>
+                                <li>date_joined:</li>
+                                <li>user.image:</li>
+                                <div className="item"><span>{user.id}</span></div>
+                                <div className="item"><span>{user.username}</span></div>
+                                <div className="item"><span>{user.email}</span></div>
+                                <div className="item"><span>{user.is_staff}</span></div>
+                                <div className="item"><span>{user.is_active}</span></div>
+                                <div className="item"><span>{user.date_joined}</span></div>
+                                <div className="item"><span>{user.image}</span></div>
+                            </div>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </div>
