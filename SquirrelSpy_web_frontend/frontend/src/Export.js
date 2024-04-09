@@ -1,16 +1,16 @@
 import React from 'react'
 import './style/mian.css'
-import {useEffect, useState, useRef} from 'react';
+import {useEffect, useState} from 'react';
 
 const Export = () =>{
-    const [squirrels, setSquirrels] = useState([]);
+    const [sightings, setSightings] = useState([]);
 
     const getSquirrels = async () => {
-            const response = await fetch('/squirrels');
+            const response = await fetch('sightings');
             const json = await response.json();
         if (response.ok) {
             console.log(json);
-            setSquirrels(json);
+            setSightings(json);
         }
         else{
             console.log('Failed to fetch')
@@ -22,6 +22,20 @@ const Export = () =>{
             getSquirrels()
         },[]
     )
+
+    const exportToCSV = () => {
+        const csvContent = 'data:text/csv;charset=utf-8,';
+        const headers = Object.keys(sightings[0]).join(',');
+        const rows = sightings.map((sighting) => Object.values(sighting).join(','));
+        const csvData = [headers, ...rows].join('\n');
+        const encodedUri = encodeURI(csvContent + csvData);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', 'squirrels.csv');
+        document.body.appendChild(link);
+        link.click();
+    };
+
 
     return(
         <div>
@@ -48,32 +62,33 @@ const Export = () =>{
             </div>
 
             <div className="container">
-                <ul className="horizontal-list">
-                    <li>Name:</li>
-                    <li>ID:</li>
-                    <li>Age:</li>
-                    <li>Sex:</li>
-                    <li>Species:</li>
-                    <li>Serial_num:</li>
-                    <li>Weight:</li>
-                    <li>Left_ear_color:</li>
-                    <li>Right_ear_color:</li>
-                    <li>Image:</li>
-                </ul>
+                <button onClick={exportToCSV}>Export as CSV</button>
                 <ul className="list">
-                    {squirrels.map((squirrel, index) => (
+                    {sightings.map((sighting, index) => (
                         <li key={index} className="squirrel-item">
-                            <div className="grid-container">
-                                <div className="item"><span>{squirrel.name}</span></div>
-                                <div className="item"><span>{squirrel.id}</span></div>
-                                <div className="item"><span>{squirrel.age}</span></div>
-                                <div className="item"><span>{squirrel.sex}</span></div>
-                                <div className="item"><span>{squirrel.species}</span></div>
-                                <div className="item"><span>{squirrel.serial_num}</span></div>
-                                <div className="item"><span>{squirrel.weight}</span></div>
-                                <div className="item"><span>{squirrel.left_ear_color}</span></div>
-                                <div className="item"><span>{squirrel.right_ear_color}</span></div>
-                                <div className="item"><span>{squirrel.image}</span></div>
+                            <div className="sightings-grid-container">
+                                <li>ID:</li>
+                                <li>User:</li>
+                                <li>Squirrel:</li>
+                                <li>Lat:</li>
+                                <li>Long:</li>
+                                <li>Time:</li>
+                                <li>Certainty_level:</li>
+                                <li>Is_verified:</li>
+                                <li>Verification_comment:</li>
+                                <li>Comment:</li>
+                                <li>Image:</li>
+                                <div className="item"><span>{sighting.id}</span></div>
+                                <div className="item"><span>{sighting.user}</span></div>
+                                <div className="item"><span>{sighting.squirrel}</span></div>
+                                <div className="item"><span>{sighting.lat}</span></div>
+                                <div className="item"><span>{sighting.long}</span></div>
+                                <div className="item"><span>{sighting.time}</span></div>
+                                <div className="item"><span>{sighting.certainty_level}</span></div>
+                                <div className="item"><span>{sighting.is_verified}</span></div>
+                                <div className="item"><span>{sighting.verification_comment}</span></div>
+                                <div className="item"><span>{sighting.comment}</span></div>
+                                <div className="item"><span>{sighting.image}</span></div>
                             </div>
                         </li>
                     ))}
