@@ -10,11 +10,11 @@ const LeaderboardScreen = () => {
     const fetchLeaderboardData = async () => {
       setLoading(true);
       try {
-        // Fetch users and sightings data using the functions from api.js
+      
         const users = await fetchUsers();
         const sightings = await fetchSightings();
 
-        // Calculate number of sightings for each user
+        
         const userSightingsCount = {};
         sightings.forEach(sighting => {
           if (userSightingsCount[sighting.user]) {
@@ -24,14 +24,14 @@ const LeaderboardScreen = () => {
           }
         });
 
-        // Create leaderboard data by mapping user data with their respective sighting count
+        
         const leaderboard = users.map(user => ({
           userId: user.id,
           username: user.username,
           sightingsCount: userSightingsCount[user.id] || 0,
         }));
 
-        // Sort leaderboard data based on the number of sightings (descending order)
+       
         leaderboard.sort((a, b) => b.sightingsCount - a.sightingsCount);
 
         setLeaderboardData(leaderboard);
