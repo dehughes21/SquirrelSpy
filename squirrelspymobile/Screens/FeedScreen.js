@@ -46,6 +46,7 @@ const FeedScreen = ({ navigation }) => {
   const [squirrels, setSquirrels] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
+  const [uniqueSightingIds, setUniqueSightingIds] = useState(new Set());
 
   useEffect(() => {
     const fetchAllSightings = async () => {
@@ -53,8 +54,14 @@ const FeedScreen = ({ navigation }) => {
       try {
         const response = await axios.get(`http://10.0.2.2:8000/sightings/?page=${pageNumber}`);
         const allSightings = response.data;
-        const sortedSightings = allSightings.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+        const filteredSightings = allSightings.filter(sighting => !uniqueSightingIds.has(sighting.id));
+        const sortedSightings = filteredSightings.sort((a, b) => new Date(b.time) - new Date(a.time));
+
         setSightings(prevSightings => [...prevSightings, ...sortedSightings]);
+        
+        const newSightingIds = new Set(filteredSightings.map(sighting => sighting.id));
+        setUniqueSightingIds(prevIds => new Set([...prevIds, ...newSightingIds]));
       } catch (error) {
         console.error('Error fetching sightings:', error);
       } finally {
@@ -125,10 +132,11 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   imageContainer: {
-    flex: 1,
-    alignItems: 'center',
+    aspectRatio: 9 / 16, 
+    width: '100%',
+    marginBottom: 5, 
     justifyContent: 'center',
-    aspectRatio: 1, 
+    alignItems: 'center',
   },
 });
 

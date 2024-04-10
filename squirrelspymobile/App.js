@@ -9,6 +9,7 @@ import PreviewSightingScreen from './Screens/PreviewSightingScreen';
 import FeedScreen from './Screens/FeedScreen';
 import SquirrelsScreen from './Screens/SquirrelsScreen';
 import MyProfileScreen from './Screens/MyProfileScreen';
+import LeaderboardScreen from './Screens/LeaderboardScreen';
 import SquirrelDetailsScreen from './Screens/SquirrelDetailsScreen'; 
 import SightingDetailsScreen from './Screens/SightingDetailsScreen'; 
 
@@ -37,14 +38,18 @@ const MainTabs = () => (
         } else if (route.name === 'My Profile') {
           iconName = focused ? 'person' : 'person-outline';
         }
+        else if (route.name === 'Leaderboard') {
+          iconName = focused ? 'trending-up-outline' : 'trending-up-outline';
+        }
 
         return <Ionicons name={iconName} size={size} color={color} />;
       },
     })}
   >
-    <Tab.Screen name="Make a Sighting" component={HomeStack} />
-    <Tab.Screen name="Sightings" component={FeedScreen} />
     <Tab.Screen name="Squirrels" component={SquirrelsScreen} />
+    <Tab.Screen name="Sightings" component={FeedScreen} />
+    <Tab.Screen name="Make a Sighting" component={HomeStack} />
+    <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
     <Tab.Screen name="My Profile" component={MyProfileScreen} />
   </Tab.Navigator>
 );
