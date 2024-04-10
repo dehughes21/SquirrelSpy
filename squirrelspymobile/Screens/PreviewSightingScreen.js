@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Button, Image, TextInput, SafeAreaView, ScrollView, StyleSheet, Platform, Dimensions } from 'react-native';
+import { Text, View, Button, Image, TextInput, SafeAreaView, ScrollView, StyleSheet, Platform, Dimensions, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { confirmSighting, savePhoto, discardPhoto, fetchSquirrels } from '../Functions/functions';
 
@@ -7,10 +7,11 @@ export default function PreviewSightingScreen({ route, navigation }) {
   const { photo } = route.params;
   const [comment, setComment] = useState('');
   const [selectedBehavior, setSelectedBehavior] = useState('');
-  const [selectedSquirrel, setSelectedSquirrel] = useState('0');
+  const [leftEarColor, setLeftEarColor] = useState('');
+  const [rightEarColor, setRightEarColor] = useState('');
   const [certaintyLevel, setCertaintyLevel] = useState('');
   const [squirrels, setSquirrels] = useState([]);
-  const [paddingBelowTextInput, setPaddingBelowTextInput] = useState(20); 
+  const [paddingBelowTextInput, setPaddingBelowTextInput] = useState(20);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,12 +28,19 @@ export default function PreviewSightingScreen({ route, navigation }) {
   }, []);
 
   const handleConfirmSighting = async () => {
-    await confirmSighting({ photo, selectedSquirrel, selectedBehavior, certaintyLevel, comment, navigation });
-    navigation.goBack()
+    const matchingSquirrel = squirrels.find(squirrel => squirrel.left_ear_color === leftEarColor && squirrel.right_ear_color === rightEarColor);
+    if (matchingSquirrel) {
+      await confirmSighting({ photo, selectedSquirrel: matchingSquirrel.id, selectedBehavior, certaintyLevel, comment, navigation });
+      navigation.goBack(); // Navigate back after confirmation
+    } else {
+      // If no matching squirrel is found, display an alert or update state to inform the user
+      Alert.alert('No Matching Squirrel Found', 'Please select valid left and right ear colors.');
+    }
   };
 
   const handleSavePhoto = async () => {
     await savePhoto(photo.uri);
+    Alert.alert('Image Saved to Camera Roll');
   };
 
   const handleDiscardPhoto = () => {
@@ -49,19 +57,27 @@ export default function PreviewSightingScreen({ route, navigation }) {
           <Button title="Confirm Sighting" onPress={handleConfirmSighting} />
         </View>
         <View style={styles.labelContainer}>
-          <Text style={styles.label}>Squirrel</Text>
+          <Text style={styles.label}>Left Ear Color</Text>
         </View>
         <Picker
-          selectedValue={selectedSquirrel}
+          selectedValue={leftEarColor}
           style={[styles.picker, Platform.OS === 'ios' && styles.pickerIOS]}
-          onValueChange={(itemValue, itemIndex) => setSelectedSquirrel(itemValue)}>
-          <Picker.Item label="No Tag" value={null} />
-          {squirrels.map((squirrel) => (
-            <Picker.Item
-              key={squirrel.id}
-              label={`Left Ear: ${squirrel.left_ear_color} | Right Ear: ${squirrel.right_ear_color}`}
-              value={squirrel.id}
-            />
+          onValueChange={(itemValue, itemIndex) => setLeftEarColor(itemValue)}>
+          <Picker.Item label="Select Left Ear Color" value="" />
+          {squirrels.map(squirrel => (
+            <Picker.Item key={squirrel.id} label={squirrel.left_ear_color} value={squirrel.left_ear_color} />
+          ))}
+        </Picker>
+        <View style={styles.labelContainer}>
+          <Text style={styles.label}>Right Ear Color</Text>
+        </View>
+        <Picker
+          selectedValue={rightEarColor}
+          style={[styles.picker, Platform.OS === 'ios' && styles.pickerIOS]}
+          onValueChange={(itemValue, itemIndex) => setRightEarColor(itemValue)}>
+          <Picker.Item label="Select Right Ear Color" value="" />
+          {squirrels.map(squirrel => (
+            <Picker.Item key={squirrel.id} label={squirrel.right_ear_color} value={squirrel.right_ear_color} />
           ))}
         </Picker>
         <View style={styles.labelContainer}>
@@ -94,8 +110,7 @@ export default function PreviewSightingScreen({ route, navigation }) {
           value={comment}
           onChangeText={setComment}
         />
-        <View style={{ marginBottom: paddingBelowTextInput }}>
-        </View>
+        <View style={{ marginBottom: paddingBelowTextInput }} />
       </ScrollView>
     </SafeAreaView>
   );

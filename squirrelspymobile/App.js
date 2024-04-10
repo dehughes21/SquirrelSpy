@@ -25,6 +25,7 @@ const HomeStack = () => (
 
 const MainTabs = () => (
   <Tab.Navigator
+    initialRouteName="Home" 
     screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
@@ -46,22 +47,26 @@ const MainTabs = () => (
       },
     })}
   >
-    <Tab.Screen name="Squirrels" component={SquirrelsScreen} />
-    <Tab.Screen name="Sightings" component={FeedScreen} />
     <Tab.Screen name="Make a Sighting" component={HomeStack} />
+    <Tab.Screen name="Sightings" component={FeedScreen} />
+    <Tab.Screen name="Squirrels" component={SquirrelsScreen} />
     <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
     <Tab.Screen name="My Profile" component={MyProfileScreen} />
   </Tab.Navigator>
 );
 
+const MainStack = () => (
+  <Stack.Navigator initialRouteName="MainTabs" screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="MainTabs" component={MainTabs} />
+    <Stack.Screen name="SquirrelDetails" component={SquirrelDetailsScreen} />
+    <Stack.Screen name="SightingDetails" component={SightingDetailsScreen} />
+  </Stack.Navigator>
+);
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="MainTabs" component={MainTabs} options={{ headerShown: false }} />
-        <Stack.Screen name="SquirrelDetails" component={SquirrelDetailsScreen} />
-        <Stack.Screen name="SightingDetails" component={SightingDetailsScreen} />
-      </Stack.Navigator>
+      <MainStack />
     </NavigationContainer>
   );
 }

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { fetchSquirrels } from '../Functions/functions';
+import { Ionicons } from '@expo/vector-icons';
 
-const SightingDetailScreen = ({ route }) => {
+const SightingDetailScreen = ({ route, navigation }) => {
   const { sighting } = route.params;
   const [squirrelName, setSquirrelName] = useState(null);
   const [squirrelImage, setSquirrelImage] = useState(null);
@@ -47,6 +48,11 @@ const SightingDetailScreen = ({ route }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={24} color="black" />
+        </TouchableOpacity>
+      </View>
       <View style={styles.container}>
         <View style={styles.squirrelImageContainer}>
           <Image source={{ uri: squirrelImage }} style={styles.squirrelImage} />
@@ -98,6 +104,10 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     backgroundColor: '#f0f0f0',
+  },
+  header: {
+    marginTop: 40, 
+    paddingHorizontal: 20,
   },
   container: {
     flex: 1,
