@@ -37,9 +37,18 @@ const SightingDetailScreen = ({ route }) => {
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
-        <Text>Squirrel Name: {squirrelName || 'Loading...'}</Text>
-        <Text>Time: {sighting.time}</Text>
-        <Text>Behavior: {sighting.behavior}</Text>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.label}>Squirrel Name:</Text>
+          <Text style={styles.text}>{squirrelName || 'Loading...'}</Text>
+        </View>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.label}>Time:</Text>
+          <Text style={styles.text}>{sighting.time}</Text>
+        </View>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.label}>Behavior:</Text>
+          <Text style={styles.text}>{sighting.behavior}</Text>
+        </View>
         <Image source={{ uri: sighting.image }} style={styles.sightingImage} />
         {region && (
           <MapView
@@ -63,6 +72,7 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     justifyContent: 'center',
+    backgroundColor: '#f0f0f0',
   },
   container: {
     flex: 1,
@@ -70,9 +80,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
+  detailsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  label: {
+    fontWeight: 'bold',
+    marginRight: 5,
+  },
+  text: {
+    flex: 1,
+  },
   map: {
     width: '100%',
-    height: 300, // Adjust the height as needed
+    height: 300,
     borderRadius: 10,
     marginTop: 10,
   },
