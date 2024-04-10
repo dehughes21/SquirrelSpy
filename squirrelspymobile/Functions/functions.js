@@ -19,6 +19,7 @@ export async function confirmSighting({ photo, selectedSquirrel, selectedBehavio
   formData.append('lat', lat);
   formData.append('long', long);
   formData.append('time', new Date().toISOString());
+  
 
  
   formData.append('certainty_level', certaintyLevel);

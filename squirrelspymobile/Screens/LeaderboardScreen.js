@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
-import { fetchUsers, fetchSightings } from '../Functions/functions'; // Import fetch functions from api.js
+import { fetchUsers, fetchSightings } from '../Functions/functions'; 
 
 const LeaderboardScreen = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
