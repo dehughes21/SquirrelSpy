@@ -31,9 +31,8 @@ export default function PreviewSightingScreen({ route, navigation }) {
     const matchingSquirrel = squirrels.find(squirrel => squirrel.left_ear_color === leftEarColor && squirrel.right_ear_color === rightEarColor);
     if (matchingSquirrel) {
       await confirmSighting({ photo, selectedSquirrel: matchingSquirrel.id, selectedBehavior, certaintyLevel, comment, navigation });
-      navigation.goBack(); // Navigate back after confirmation
+      navigation.goBack(); 
     } else {
-      // If no matching squirrel is found, display an alert or update state to inform the user
       Alert.alert('No Matching Squirrel Found', 'Please select valid left and right ear colors.');
     }
   };

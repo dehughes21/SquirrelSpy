@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -12,6 +12,7 @@ import MyProfileScreen from './Screens/MyProfileScreen';
 import LeaderboardScreen from './Screens/LeaderboardScreen';
 import SquirrelDetailsScreen from './Screens/SquirrelDetailsScreen'; 
 import SightingDetailsScreen from './Screens/SightingDetailsScreen'; 
+import LoginScreen from './Screens/LoginScreen'; // Import the LoginScreen component
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -38,8 +39,7 @@ const MainTabs = () => (
           iconName = focused ? 'paw' : 'paw-outline';
         } else if (route.name === 'My Profile') {
           iconName = focused ? 'person' : 'person-outline';
-        }
-        else if (route.name === 'Leaderboard') {
+        } else if (route.name === 'Leaderboard') {
           iconName = focused ? 'trending-up-outline' : 'trending-up-outline';
         }
 
@@ -64,9 +64,19 @@ const MainStack = () => (
 );
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
+
   return (
     <NavigationContainer>
-      <MainStack />
+      {isLoggedIn ? (
+        <MainStack />
+      ) : (
+        <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Login">
+            {props => <LoginScreen {...props} setIsLoggedIn={setIsLoggedIn} />}
+          </Stack.Screen>
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
 }
