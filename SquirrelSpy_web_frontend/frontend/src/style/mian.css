@@ -56,18 +56,21 @@ background-color: rgb(86, 18, 22);
 }
 
 .sightings-grid-container {
+    background-color: rgba(166, 129, 69);
     display: grid;
     grid-template-columns: repeat(11, 1fr); /* Adjust the number of columns as needed */
     grid-gap: 1px; /* Adjust the gap between grid items */
 }
 
 .squirrels-grid-container {
+    background-color: rgba(166, 129, 69);
     display: grid;
     grid-template-columns: repeat(10, 1fr); /* Adjust the number of columns as needed */
     grid-gap: 1px; /* Adjust the gap between grid items */
 }
 
 .users-grid-container {
+    background-color: rgba(166, 129, 69);
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* Adjust the number of columns as needed */
     grid-gap: 1px; /* Adjust the gap between grid items */
@@ -83,4 +86,30 @@ background-color: rgb(86, 18, 22);
 
 .horizontal-list li {
     margin-right: 20px; /* Adjust margin as needed */
+}
+
+.checkboxes {
+    list-style-type: block;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(166, 129, 69);
+}
+.date-inputs {
+    background-color: rgba(166, 129, 69);
+}
+
+.container {
+    display: flex;
+}
+
+.Edit-left {
+    flex: 1;
+    background-color: rgba(166, 129, 69); /* Example background color */
+    padding: 20px;
+}
+
+.Edit-right {
+    flex: 1;
+    background-color: rgba(166, 129, 69); /* Example background color */
+    padding: 20px;
 }
