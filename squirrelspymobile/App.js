@@ -12,7 +12,8 @@ import MyProfileScreen from './Screens/MyProfileScreen';
 import LeaderboardScreen from './Screens/LeaderboardScreen';
 import SquirrelDetailsScreen from './Screens/SquirrelDetailsScreen'; 
 import SightingDetailsScreen from './Screens/SightingDetailsScreen'; 
-import LoginScreen from './Screens/LoginScreen'; // Import the LoginScreen component
+import LoginScreen from './Screens/LoginScreen'; 
+ 
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
