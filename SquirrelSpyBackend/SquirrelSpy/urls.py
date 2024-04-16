@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
-from .views import SquirrelViewSet, UserViewSet, SightingViewSet
+from .views import SquirrelViewSet, UserViewSet, SightingViewSet, UserRegistrationView, UserLoginView
 
 router = DefaultRouter()
 router.register(r'squirrels', SquirrelViewSet)
@@ -28,5 +28,7 @@ router.register(r'sightings', SightingViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('register/', UserRegistrationView.as_view(), name='Register'),
+    path('login/', UserLoginView.as_view(), name='Login'),
     path('', include(router.urls))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
