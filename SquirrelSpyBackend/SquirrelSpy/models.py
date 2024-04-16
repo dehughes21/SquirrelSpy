@@ -16,13 +16,15 @@ class Squirrel(models.Model):
         return self.name
     
 class User(AbstractUser):
-    # Fields in AbstractUser class
+
+    # AbstractUser fields
         # username
         # email
         # password
         # is_staff - default = False
         # is_active - default = True
         # date_joined - default = Datetime Created
+
     # Custom fields
     reliability = models.IntegerField(default=2)
     ranking = models.IntegerField(default=4)
