@@ -19,7 +19,7 @@ class UserRegistrationView(generics.CreateAPIView):
         if serializer.is_valid():
             user = serializer.save()
             token, _ = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key}, status=200)
+            return Response({'token': token.key, 'user_id': user.id}, status=200)
         return Response(serializer.errors, status=400)
 
 class UserLoginView(generics.CreateAPIView):
@@ -35,7 +35,7 @@ class UserLoginView(generics.CreateAPIView):
             if user:
                 update_last_login(None, user)
                 token, _ = Token.objects.get_or_create(user=user)
-                return Response({'token': token.key}, status=200)
+                return Response({'token': token.key, 'user_id': user.id}, status=200)
         return Response({'error': 'Invalid Credentials'}, status=401)
 
 class UserViewSet(viewsets.ModelViewSet):
