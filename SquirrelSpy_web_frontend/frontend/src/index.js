@@ -6,6 +6,7 @@ import Moderate from './Moderate'
 import Verify from './Verify'
 import Edit from './Edit'
 import Export from './Export'
+import Detail from './Detail'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
     path: "/verify",
     element: <Verify/>,
+  },
+  {
+    path: "/verify/:id",
+    element: <Detail/>,
   },
 ]);
 

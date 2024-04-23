@@ -1,30 +1,39 @@
-import React from 'react'
-import './style/mian.css'
-import {useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-const Verify = () =>{
+const Detail = () => {
     const [sightings, setSightings] = useState([]);
+    const { id } = useParams(); // Extracting the ID parameter from the URL
 
-    const getSquirrels = async () => {
-            const response = await fetch('sightings');
-            const json = await response.json();
-        if (response.ok) {
-            console.log(json);
-            setSightings(json);
-        }
-        else{
-            console.log('Failed to fetch')
-        }
-    }
+    useEffect(() => {
+        let isMounted = true; // Flag to track if component is still mounted
 
-    useEffect(
-        () => {
-            getSquirrels()
-        },[]
-    )
+        const getSquirrels = async () => {
+            try {
+                const response = await fetch('/sightings');
+                const json = await response.json();
+                if (response.ok && isMounted) {
+                    // Filter the sightings data based on the ID parameter
+                    const filteredSightings = json.filter(sighting => sighting.id == id);
+                    setSightings(filteredSightings);
+                } else {
+                    console.log('Failed to fetch');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
 
-    return(
+        getSquirrels();
+
+        // Cleanup function to set isMounted to false when component unmounts
+        return () => {
+            isMounted = false;
+        };
+    }, [id]); // Add id to the dependency array to fetch data when ID changes
+
+
+    return (
         <div>
             <div className="header">
                 <div className="logo">
@@ -48,7 +57,7 @@ const Verify = () =>{
                 </div>
             </div>
 
-            <div className="container">
+                        <div className="container">
                 <ul className="list">
                     {sightings.map((sighting, index) => (
                         <li key={index} className="squirrel-item">
@@ -64,7 +73,7 @@ const Verify = () =>{
                                 <li>Verification_comment:</li>
                                 <li>Comment:</li>
                                 <li>Image:</li>
-                                <div className="item"><span><Link to={`/verify/${sighting.id}`}>{sighting.id}</Link></span></div>
+                                <div className="item"><span>{sighting.id}</span></div>
                                 <div className="item"><span>{sighting.user}</span></div>
                                 <div className="item"><span>{sighting.squirrel}</span></div>
                                 <div className="item"><span>{sighting.lat}</span></div>
@@ -81,9 +90,7 @@ const Verify = () =>{
                 </ul>
             </div>
         </div>
-    )
-
+    );
 }
 
-
-export default Verify;
+export default Detail;
