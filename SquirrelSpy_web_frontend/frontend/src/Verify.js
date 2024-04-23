@@ -76,7 +76,13 @@ const Verify = () =>{
                                 <div className="item"><span>{sighting.is_verified ? 'Verified' : 'Not Verified'}</span></div>
                                 <div className="item"><span>{sighting.verification_comment}</span></div>
                                 <div className="item"><span>{sighting.comment}</span></div>
-                                <div className="item"><span><img src={sighting.image} alt={`Sighting ${sighting.id}`} /></span></div>
+                                <span>
+                                    <img
+                                        src={sighting.image}
+                                        alt={`Sighting ${sighting.id}`}
+                                        style={{ width: '200px', height: 'auto' }} // Set width to 100px and auto height to maintain aspect ratio
+                                    />
+                                </span>
                             </div>
                         </li>
                     ))}
