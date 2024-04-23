@@ -69,30 +69,30 @@ const CreateAccountScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Create Account</Text>
-      {profilePicture && <Image source={{ uri: profilePicture.uri }} style={{ width: 100, height: 100, borderRadius: 50 }} />}
-      <Button title="Select Profile Picture" onPress={selectProfilePicture} />
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFFFFF' }}>
+      <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 20, color: '#800000' }}>Create Account</Text>
+      {profilePicture && <Image source={{ uri: profilePicture.uri }} style={{ width: 100, height: 100, borderRadius: 50, marginBottom: 20 }} />}
+      <Button title="Select Profile Picture" onPress={selectProfilePicture} color="#561216" />
       <TextInput
         placeholder="Username"
         value={username}
         onChangeText={setUsername}
-        style={{ height: 40, width: 200, borderColor: 'gray', borderWidth: 1, marginVertical: 10 }}
+        style={{ height: 40, width: 200, borderColor: '#800000', borderWidth: 1, marginVertical: 10, paddingHorizontal: 10, backgroundColor: '#FFF' }}
       />
       <TextInput
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
-        style={{ height: 40, width: 200, borderColor: 'gray', borderWidth: 1, marginVertical: 10 }}
+        style={{ height: 40, width: 200, borderColor: '#800000', borderWidth: 1, marginVertical: 10, paddingHorizontal: 10, backgroundColor: '#FFF' }}
       />
       <TextInput
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry={true}
-        style={{ height: 40, width: 200, borderColor: 'gray', borderWidth: 1, marginVertical: 10 }}
+        style={{ height: 40, width: 200, borderColor: '#800000', borderWidth: 1, marginVertical: 10, paddingHorizontal: 10, backgroundColor: '#FFF' }}
       />
-      <Button title="Create Account" onPress={handleCreateAccount} />
+      <Button title="Create Account" onPress={handleCreateAccount} color="#A68145" />
     </View>
   );
 };
