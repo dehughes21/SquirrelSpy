@@ -119,64 +119,26 @@ const Export = () =>{
                     <input type="date" id="endDate" name="endDate" value={endDate} onChange={handleChange} />
                 </div>
 
-            <div className="checkboxes">
-                <label>
-                    <input type="checkbox" name="user" checked={checkboxes.checkbox2} onChange={handleChange} />
-                    User
-                </label>
 
-                <label>
-                    <input type="checkbox" name="lat" checked={checkboxes.checkbox4} onChange={handleChange} />
-                    Lat
-                </label>
-                <label>
-                    <input type="checkbox" name="long" checked={checkboxes.checkbox5} onChange={handleChange} />
-                    Long
-                </label>
-                <label>
-                    <input type="checkbox" name="time" checked={checkboxes.checkbox6} onChange={handleChange} />
-                    Time
-                </label>
-                <label>
-                    <input type="checkbox" name="certainty_level" checked={checkboxes.checkbox7} onChange={handleChange} />
-                    Certainty Level
-                </label>
-                <label>
-                    <input type="checkbox" name="is_verified" checked={checkboxes.checkbox8} onChange={handleChange} />
-                    Is Verified
-                </label>
-                <label>
-                    <input type="checkbox" name="verification_comment" checked={checkboxes.checkbox9} onChange={handleChange} />
-                    Verification Comment
-                </label>
-                <label>
-                    <input type="checkbox" name="comment" checked={checkboxes.checkbox10} onChange={handleChange} />
-                    Comment
-                </label>
-                <label>
-                    <input type="checkbox" name="image" checked={checkboxes.checkbox11} onChange={handleChange} />
-                    Image
-                </label>
-            </div>
 
 
                 <button onClick={exportToCSV}>Export as CSV</button>
                  <ul className="list">
+                <div className="sightings-grid-container">
+                <li>ID:</li>
+                <li>User:</li>
+                <li>Squirrel:</li>
+                <li>Lat:</li>
+                <li>Long:</li>
+                <li>Time:</li>
+                <li>Certainty_level:</li>
+                <li>Is_verified:</li>
+                <li>Verification_comment:</li>
+                <li>Comment:</li>
+                <li>Image:</li>
+                </div>
                 {sightings.map((sighting, index) => (
                     <li key={index} className="squirrel-item">
-                        <div className="sightings-grid-container">
-                            <li>ID:</li>
-                            <li>User:</li>
-                            <li>Squirrel:</li>
-                            <li>Lat:</li>
-                            <li>Long:</li>
-                            <li>Time:</li>
-                            <li>Certainty_level:</li>
-                            <li>Is_verified:</li>
-                            <li>Verification_comment:</li>
-                            <li>Comment:</li>
-                            <li>Image:</li>
-                        </div>
                         <div className="sightings-grid-container">
                             <div className="item"><span>{sighting.id}</span></div>
                             <div className="item"><span>{sighting.user}</span></div>
@@ -185,7 +147,7 @@ const Export = () =>{
                             <div className="item"><span>{sighting.long}</span></div>
                             <div className="item"><span>{sighting.time}</span></div>
                             <div className="item"><span>{sighting.certainty_level}</span></div>
-                            <div className="item"><span>{sighting.is_verified}</span></div>
+                            <div className="item"><span>{sighting.is_verified ? 'Verified' : 'Not Verified'}</span></div>
                             <div className="item"><span>{sighting.verification_comment}</span></div>
                             <div className="item"><span>{sighting.comment}</span></div>
                             <div className="item"><span>{sighting.image}</span></div>

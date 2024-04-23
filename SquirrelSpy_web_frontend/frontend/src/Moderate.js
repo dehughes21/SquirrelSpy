@@ -49,16 +49,18 @@ const Moderate = () =>{
 
             <div className="container">
                 <ul className="list">
+                    <div className="users-grid-container">
+                    <li>ID:</li>
+                    <li>Name:</li>
+                    <li>email:</li>
+                    <li>is_staff:</li>
+                    <li>is_active:</li>
+                    <li>date_joined:</li>
+                    <li>user.image:</li>
+                    </div>
                     {users.map((user, index) => (
                         <li key={index} className="squirrel-item">
                             <div className="users-grid-container">
-                                <li>ID:</li>
-                                <li>Name:</li>
-                                <li>email:</li>
-                                <li>is_staff:</li>
-                                <li>is_active:</li>
-                                <li>date_joined:</li>
-                                <li>user.image:</li>
                                 <div className="item"><span>{user.id}</span></div>
                                 <div className="item"><span>{user.username}</span></div>
                                 <div className="item"><span>{user.email}</span></div>

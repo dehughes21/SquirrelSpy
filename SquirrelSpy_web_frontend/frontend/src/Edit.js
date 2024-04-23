@@ -66,8 +66,6 @@ const Edit = () =>{
              <div className="container">
                  <div className="Edit-left">
                     <ul className="list">
-                    {sightings.map((sighting, index) => (
-                        <li key={index} className="squirrel-item">
                             <div className="sightings-grid-container">
                                 <li>ID:</li>
                                 <li>User:</li>
@@ -80,6 +78,10 @@ const Edit = () =>{
                                 <li>Verification_comment:</li>
                                 <li>Comment:</li>
                                 <li>Image:</li>
+                                </div>
+                    {sightings.map((sighting, index) => (
+                        <li key={index} className="squirrel-item">
+                            <div className="sightings-grid-container">
                                 <div className="item"><span>{sighting.id}</span></div>
                                 <div className="item"><span>{sighting.user}</span></div>
                                 <div className="item"><span>{sighting.squirrel}</span></div>
@@ -98,19 +100,21 @@ const Edit = () =>{
                 </div>
                 <div className="Edit-right">
                     <ul className="list">
+                    <div className="squirrels-grid-container">
+                        <li>Name:</li>
+                        <li>ID:</li>
+                        <li>Age:</li>
+                        <li>Sex:</li>
+                        <li>Species:</li>
+                        <li>Serial_num:</li>
+                        <li>Weight:</li>
+                        <li>Left_ear_color:</li>
+                        <li>Right_ear_color:</li>
+                        <li>Image:</li>
+                    </div>
                     {squirrels.map((squirrel, index) => (
                         <li key={index} className="squirrel-item">
                             <div className="squirrels-grid-container">
-                                <li>Name:</li>
-                                <li>ID:</li>
-                                <li>Age:</li>
-                                <li>Sex:</li>
-                                <li>Species:</li>
-                                <li>Serial_num:</li>
-                                <li>Weight:</li>
-                                <li>Left_ear_color:</li>
-                                <li>Right_ear_color:</li>
-                                <li>Image:</li>
                                 <div className="item"><span>{squirrel.name}</span></div>
                                 <div className="item"><span>{squirrel.id}</span></div>
                                 <div className="item"><span>{squirrel.age}</span></div>

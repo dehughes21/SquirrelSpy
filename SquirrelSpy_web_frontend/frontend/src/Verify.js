@@ -50,20 +50,22 @@ const Verify = () =>{
 
             <div className="container">
                 <ul className="list">
+                <div className="sightings-grid-container">
+                <li>ID:</li>
+                <li>User:</li>
+                <li>Squirrel:</li>
+                <li>Lat:</li>
+                <li>Long:</li>
+                <li>Time:</li>
+                <li>Certainty_level:</li>
+                <li>Is_verified:</li>
+                <li>Verification_comment:</li>
+                <li>Comment:</li>
+                <li>Image:</li>
+                </div>
                     {sightings.map((sighting, index) => (
                         <li key={index} className="squirrel-item">
                             <div className="sightings-grid-container">
-                                <li>ID:</li>
-                                <li>User:</li>
-                                <li>Squirrel:</li>
-                                <li>Lat:</li>
-                                <li>Long:</li>
-                                <li>Time:</li>
-                                <li>Certainty_level:</li>
-                                <li>Is_verified:</li>
-                                <li>Verification_comment:</li>
-                                <li>Comment:</li>
-                                <li>Image:</li>
                                 <div className="item"><span><Link to={`/verify/${sighting.id}`}>{sighting.id}</Link></span></div>
                                 <div className="item"><span>{sighting.user}</span></div>
                                 <div className="item"><span>{sighting.squirrel}</span></div>
@@ -74,7 +76,7 @@ const Verify = () =>{
                                 <div className="item"><span>{sighting.is_verified ? 'Verified' : 'Not Verified'}</span></div>
                                 <div className="item"><span>{sighting.verification_comment}</span></div>
                                 <div className="item"><span>{sighting.comment}</span></div>
-                                <div className="item"><span>{sighting.image}</span></div>
+                                <div className="item"><span><img src={sighting.image} alt={`Sighting ${sighting.id}`} /></span></div>
                             </div>
                         </li>
                     ))}
