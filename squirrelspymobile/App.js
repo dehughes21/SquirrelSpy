@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from './Screens/HomeScreen';
 import PreviewSightingScreen from './Screens/PreviewSightingScreen';
@@ -10,10 +10,10 @@ import FeedScreen from './Screens/FeedScreen';
 import SquirrelsScreen from './Screens/SquirrelsScreen';
 import MyProfileScreen from './Screens/MyProfileScreen';
 import LeaderboardScreen from './Screens/LeaderboardScreen';
-import SquirrelDetailsScreen from './Screens/SquirrelDetailsScreen'; 
-import SightingDetailsScreen from './Screens/SightingDetailsScreen'; 
-import LoginScreen from './Screens/LoginScreen'; 
- 
+import SquirrelDetailsScreen from './Screens/SquirrelDetailsScreen';
+import SightingDetailsScreen from './Screens/SightingDetailsScreen';
+import LoginScreen from './Screens/LoginScreen';
+import CreateAccountScreen from './Screens/CreateAccountScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -27,7 +27,7 @@ const HomeStack = () => (
 
 const MainTabs = () => (
   <Tab.Navigator
-    initialRouteName="Home" 
+    initialRouteName="Home"
     screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
@@ -65,7 +65,7 @@ const MainStack = () => (
 );
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <NavigationContainer>
@@ -76,6 +76,7 @@ export default function App() {
           <Stack.Screen name="Login">
             {props => <LoginScreen {...props} setIsLoggedIn={setIsLoggedIn} />}
           </Stack.Screen>
+          <Stack.Screen name="CreateAccount" component={CreateAccountScreen} />
         </Stack.Navigator>
       )}
     </NavigationContainer>
