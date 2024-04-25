@@ -24,6 +24,12 @@ const Verify = () =>{
         },[]
     )
 
+    const handleCheckboxChange = (index) => {
+        const updatedSightings = [...sightings];
+        updatedSightings[index].is_verified = !updatedSightings[index].is_verified;
+        setSightings(updatedSightings);
+    };
+
     return(
         <div>
             <div className="header">
@@ -73,14 +79,20 @@ const Verify = () =>{
                                 <div className="item"><span>{sighting.long}</span></div>
                                 <div className="item"><span>{sighting.time}</span></div>
                                 <div className="item"><span>{sighting.certainty_level}</span></div>
-                                <div className="item"><span>{sighting.is_verified ? 'Verified' : 'Not Verified'}</span></div>
+                                <div className="item">
+                                    <input
+                                        type="checkbox"
+                                        checked={sighting.is_verified}
+                                        onChange={() => handleCheckboxChange(index)}
+                                    />
+                                </div>
                                 <div className="item"><span>{sighting.verification_comment}</span></div>
                                 <div className="item"><span>{sighting.comment}</span></div>
                                 <span>
                                     <img
                                         src={sighting.image}
                                         alt={`Sighting ${sighting.id}`}
-                                        style={{ width: '200px', height: 'auto' }} // Set width to 100px and auto height to maintain aspect ratio
+                                        style={{ width: '150px', height: 'auto' }} // Set width to 100px and auto height to maintain aspect ratio
                                     />
                                 </span>
                             </div>
