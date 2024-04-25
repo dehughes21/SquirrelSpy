@@ -30,6 +30,12 @@ const Verify = () =>{
         setSightings(updatedSightings);
     };
 
+    const handleCommentChange = (index, event) => {
+        const updatedSightings = [...sightings];
+        updatedSightings[index].verification_comment = event.target.value;
+        setSightings(updatedSightings);
+    };
+
     return(
         <div>
             <div className="header">
@@ -86,7 +92,13 @@ const Verify = () =>{
                                         onChange={() => handleCheckboxChange(index)}
                                     />
                                 </div>
-                                <div className="item"><span>{sighting.verification_comment}</span></div>
+                                <div className="item">
+                                    <input
+                                        type="text"
+                                        value={sighting.verification_comment}
+                                        onChange={(event) => handleCommentChange(index, event)}
+                                    />
+                                </div>
                                 <div className="item"><span>{sighting.comment}</span></div>
                                 <span>
                                     <img
