@@ -34,6 +34,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['10.0.2.2', '127.0.0.1', 'localhost']
 
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000/', 'http://localhost:3000/']
+
 AUTH_USER_MODEL = 'SquirrelSpy.User'
 
 AUTHENTICATION_BACKENDS = (
@@ -43,7 +45,11 @@ AUTHENTICATION_BACKENDS = (
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
     ),
 }
 

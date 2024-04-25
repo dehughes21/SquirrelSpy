@@ -43,6 +43,7 @@ class Sighting(models.Model):
     behavior = models.CharField(max_length=50)
     certainty_level = models.IntegerField(default=2)
     is_verified = models.BooleanField(default=False)
+    is_rejected = models.BooleanField(default=False)
     verification_comment = models.CharField(default=None, null=True, max_length=50)
     image = models.ImageField(upload_to='sighting_images/', blank=True, null=True)
 

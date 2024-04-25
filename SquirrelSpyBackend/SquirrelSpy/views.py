@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework import generics, permissions
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
@@ -53,7 +53,8 @@ class SightingViewSet(viewsets.ModelViewSet):
     queryset = Sighting.objects.all()
     serializer_class = SightingSerializer
     #permission_classes = (permissions.IsAuthenticated,)
-    parser_classes = (MultiPartParser, FormParser)
+    permission_classes = (permissions.AllowAny,)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
     @action(detail=False, methods=['get'])
     def by_squirrel(self, request, *args, **kwargs):
@@ -67,4 +68,18 @@ class SightingViewSet(viewsets.ModelViewSet):
         user = request.query_params.get('user')
         sightings = self.queryset.filter(user=user)
         serializer = self.get_serializer(sightings, many=True)
+        return Response(serializer.data)
+
+    def put(self, request):
+        print("request: ", request.data)
+        id = request.data['id']
+        sighting = Sighting.objects.get(pk=id)
+
+        sighting.is_verified = request.data['is_verified']
+        sighting.is_rejected = request.data['is_rejected']
+
+        comment = request.data['comment']
+        sighting.verification_comment = comment
+        sighting.save()
+        serializer = self.get_serializer(sighting)
         return Response(serializer.data)

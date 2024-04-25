@@ -38,4 +38,4 @@ class SightingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sighting
-        fields = ['id', 'user', 'squirrel', 'lat', 'long', 'time', 'behavior', 'certainty_level', 'is_verified', 'verification_comment', 'comment', 'image']
+        fields = ['id', 'user', 'squirrel', 'lat', 'long', 'time', 'behavior', 'certainty_level', 'is_verified', 'is_rejected', 'verification_comment', 'comment', 'image']
