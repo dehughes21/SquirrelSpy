@@ -17,10 +17,12 @@ const LeaderboardScreen = () => {
         
         const userSightingsCount = {};
         sightings.forEach(sighting => {
-          if (userSightingsCount[sighting.user]) {
-            userSightingsCount[sighting.user]++;
-          } else {
-            userSightingsCount[sighting.user] = 1;
+          if (sighting.is_verified) {
+            if (userSightingsCount[sighting.user]) {
+              userSightingsCount[sighting.user]++;
+            } else {
+              userSightingsCount[sighting.user] = 1;
+            }
           }
         });
 

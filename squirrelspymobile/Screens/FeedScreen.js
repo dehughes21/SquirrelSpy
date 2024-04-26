@@ -55,7 +55,7 @@ const FeedScreen = ({ navigation }) => {
         const response = await axios.get(`http://10.0.2.2:8000/sightings/?page=${pageNumber}`);
         const allSightings = response.data;
 
-        const filteredSightings = allSightings.filter(sighting => !uniqueSightingIds.has(sighting.id));
+        const filteredSightings = allSightings.filter(sighting => !uniqueSightingIds.has(sighting.id) && sighting.is_verified);
         const sortedSightings = filteredSightings.sort((a, b) => new Date(b.time) - new Date(a.time));
 
         setSightings(prevSightings => [...prevSightings, ...sortedSightings]);
