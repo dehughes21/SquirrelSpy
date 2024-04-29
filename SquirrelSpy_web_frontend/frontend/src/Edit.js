@@ -5,6 +5,16 @@ import {useEffect, useState} from 'react';
 const Edit = () =>{
     const [squirrels, setSquirrels] = useState([]);
     const [sightings, setSightings] = useState([]);
+    const [newSquirrel, setNewSquirrel] = useState({
+        name: '',
+        left_ear_color: '',
+        right_ear_color: '',
+        serial_num: '',
+        age: '',
+        sex: '',
+        weight: '',
+        species: ''
+    });
 
 
     const getSquirrels = async () => {
@@ -28,6 +38,34 @@ const Edit = () =>{
         }
         else{
             console.log('Failed to fetch')
+        }
+    }
+
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        console.log('name: ', name);
+        console.log('value: ', value);
+        setNewSquirrel({...newSquirrel, [name]: value});
+    }
+
+    const createSquirrel = async (event) => {
+        console.log("Squirrel: ", newSquirrel);
+        event.preventDefault();
+        const response = await fetch('/squirrels/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newSquirrel),
+        });
+        const json = await response.json();
+        if (response.ok) {
+            getSquirrels();
+            console.log(json);
+        }
+        else{
+            console.log('Failed to Create Squirrel: ', json)
         }
     }
 
@@ -99,23 +137,30 @@ const Edit = () =>{
             </div>
 
             <div className="create-squirrel-container" style={{marginLeft: '30em', marginRight: '25em'}}>
-                <form style={{padding: '3em', alignContent: 'center'}}>
+                <form onSubmit={createSquirrel} style={{padding: '1em', alignContent: 'center', backgroundColor: '#a68145', border: 'solid', borderStyle: 'outset', borderWidth: '0.5em', borderColor: '#91703c'}}>
                 <h2>Add New Squirrel</h2>
                     <label>Name
                         <br></br>
-                        <input type='text' />
+                        <input
+                            type='text' 
+                            name='name'
+                            value={newSquirrel.name}
+                            onChange={handleChange}
+                        />
                     </label>
                     <br></br>
                     <div style={{display: 'flex'}}>
                         <label>Left Ear Color
                             <br></br>
-                            <select>
+                            <select name='left_ear_color' value={newSquirrel.left_ear_color} onChange={handleChange}>
+                                <option value="" selected disabled hidden>Select Color</option>
                                 <option value="red">Red</option>
                             </select>
                         </label>
                         <label>Right Ear Color
                             <br></br>
-                            <select>
+                            <select name='right_ear_color' value={newSquirrel.right_ear_color} onChange={handleChange}>
+                                <option value="" selected disabled hidden>Select Color</option>
                                 <option value="blue">Blue</option>
                             </select>
                         </label>
@@ -123,40 +168,41 @@ const Edit = () =>{
                     <div>
                         <label>Tag Serial Number
                             <br></br>
-                            <input type='text' />
+                            <input type='text' name='serial_num' value={newSquirrel.serial_num} onChange={handleChange}/>
                         </label>
                     </div>
                     <div>
                         <label>Sex
                             <br></br>
-                            <select>
+                            <select name='sex' value={newSquirrel.sex} onChange={handleChange}>
+                                <option value="" selected disabled hidden>Select Sex</option>
                                 <option value="M">Male</option>
                                 <option value="F">Female</option>
                             </select>
                         </label>
+                        <br></br>
                         <label>Age
                             <br></br>
-                            <input type='number' />
+                            <input type='number' name='age' value={newSquirrel.age} onChange={handleChange}/>
                         </label>
+                        <br></br>
                         <label>Weight
                             <br></br>
-                            <input type='number' />
+                            <input type='number' name='weight' value={newSquirrel.weight} onChange={handleChange}/>
                         </label>
+                        <br></br>
                         <label>Species
                             <br></br>
-                            <select>
+                            <select name='species' value={newSquirrel.species} onChange={handleChange}>
+                                <option value="" selected disabled hidden>Select Species</option>
                                 <option value="Brown">Brown</option>
                                 <option value="Black">Black</option>
                                 <option value="Red">Red</option>
                             </select>
                         </label>
                     </div>
-                    <div>
-                        <label>Squirrel Image
-                            <br></br>
-                            <input type='image' />
-                        </label>
-                    </div>
+                    <br></br>
+                    <button type='submit'>Submit</button>
                 </form>
             </div>
 
